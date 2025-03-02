@@ -1,35 +1,66 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import "./App.css";
+import Languages from "./components/Languages/Languages.jsx";
+import GuessBox from "./components/GuessBoxes/GuessBoxes.jsx";
+import Keyboard from "./components/Keyboard/Keyboard.jsx";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const MAX_ATTEMPTS = 8;
+
+  // contains information all the languages that are present or gone
+  const languageInfo = [
+    { name: "HTML", isDead: false, bgColor: "#E2680F", textColor: "white" },
+    { name: "CSS", isDead: false, bgColor: "#328AF1", textColor: "white" },
+    {
+      name: "javascript",
+      isDead: false,
+      bgColor: "#F4EB13",
+      textColor: "black",
+    },
+    { name: "react", isDead: false, bgColor: "#2ED3E9", textColor: "black" },
+    {
+      name: "Typescript",
+      isDead: false,
+      bgColor: "#298EC6",
+      textColor: "white",
+    },
+    { name: "Node.js", isDead: false, bgColor: "#599137", textColor: "white" },
+    { name: "Python", isDead: false, bgColor: "#FFD742", textColor: "black" },
+    { name: "Ruby", isDead: false, bgColor: "#D02B2B", textColor: "white" },
+    { name: "Assembly", isDead: false, bgColor: "#2D519F", textColor: "white" },
+  ];
+
+  // STATES
+  const [languages, setLanguage] = useState(languageInfo);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+    <div className="app-container">
+      <header>
+        <h1>Assembly: Endgame</h1>
         <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+          Guess the word in under {MAX_ATTEMPTS} attempts to keep the
+          programming world safe from Assembly!
         </p>
+      </header>
+      <div className="hidden-brick">
+        {/* This will contain information about whether someone has won, lost or if a programming language is gone */}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+      <main>
+        <section className="languages-container">
+          {languages.map((language, index) => (
+            <Languages
+              key={index}
+              name={language.name}
+              bgColor={language.bgColor}
+              textColor={language.textColor}
+            />
+          ))}
+        </section>
+        <GuessBox />
+        <Keyboard />
+      </main>
+    </div>
+  );
+};
 
-export default App
+export default App;
