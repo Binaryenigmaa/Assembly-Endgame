@@ -2,7 +2,8 @@ import React from "react";
 import "./GuessBoxes.css";
 
 const GuessBoxes = (props) => {
-  return <div className="guessbox">{props.character}</div>;
+  const isGuessed = props.guessedChar.includes(props.char);
+  return <div className="guessbox">{isGuessed ? props.char : ""}</div>;
 };
 
 export default GuessBoxes;

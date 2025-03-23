@@ -2,10 +2,13 @@ import React from "react";
 import "./Languages.css";
 
 const Languages = (props) => {
-  const style = { backgroundColor: props.bgColor, color: props.textColor };
+  let style = { backgroundColor: props.bgColor, color: props.textColor };
 
   return (
-    <span style={style} className="language-div">
+    <span
+      style={style}
+      className={`language-div ${props.isDead ? "lost-language" : ""}`}
+    >
       {props.name}
     </span>
   );

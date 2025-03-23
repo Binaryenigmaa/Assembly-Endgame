@@ -29,10 +29,17 @@ header p {
 }
 
 .hidden-brick {
-  display: none;
   background-color: #10a95b;
   text-align: center;
   border-radius: 4px;
+}
+
+.gameWon {
+  background-color: #10a95b;
+}
+
+.gameLost {
+  background-color: #ba2a2a;
 }
 
 .languages-container {
@@ -58,4 +65,13 @@ main {
   max-width: 650px;
   gap: 12px;
   justify-content: center;
+}
+
+.new-game-btn {
+  padding: 0.8rem 3rem;
+  background-color: #11b5e5;
+  color: #1e1e1e;
+  border: 1px solid #d7d7d7;
+  font-weight: 600;
+  border-radius: 4px;
 }
