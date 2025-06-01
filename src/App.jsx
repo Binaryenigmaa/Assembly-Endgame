@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { languageInfo } from "./languageData.js";
 import { allKeys } from "./keysData.js";
 import "./App.css";
@@ -9,6 +9,8 @@ import eightLetterWords from "./wordsList.js";
 
 const App = () => {
   console.log("App rerendered");
+
+  const newGameRef = useRef(null);
 
   // STATES
   const [languages, setLanguage] = useState(languageInfo);
@@ -44,6 +46,13 @@ const App = () => {
         ? prevLetter
         : [...prevLetter, keyboardKey]
     );
+  }
+
+  function startNewGame() {
+    setCurrentWord(selectRandomWord());
+    setGuessedChar([]);
+    if (newGameRef.current !== null)
+      newGameRef.current.scrollIntoView({ behavior: "smooth" });
   }
 
   return (
@@ -121,7 +130,15 @@ const App = () => {
           })}
         </section>
 
-        {isGameOver && <button className="new-game-btn">New Game</button>}
+        {isGameOver && (
+          <button
+            ref={newGameRef}
+            onClick={startNewGame}
+            className="new-game-btn"
+          >
+            New Game
+          </button>
+        )}
       </main>
     </div>
   );
